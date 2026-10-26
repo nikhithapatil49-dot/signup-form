@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Signup Form</title>
+</head>
+<body>
+<h2>Signup Form</h2>
+
+<form onsubmit="return validate()">
+Name: <br>
+<input type="text" id="name"><br>
+<p id="nErr" style="color:red"></p>
+
+Email: <br>
+<input type="text" id="email"><br>
+<p id="eErr" style="color:red"></p>
+
+Password: <br>
+<input type="password" id="pass" onkeyup="strengthCheck()"><br>
+<p id="sText"></p>
+<p id="pErr" style="color:red"></p>
+
+<input type="submit" value="Signup">
+</form>
+
+<p id="ok" style="color:green"></p>
+
+<script>
+function strengthCheck(){
+  var p = document.getElementById("pass").value;
+  var s = document.getElementById("sText");
+  if(p.length < 4){
+    s.innerHTML = "Weak password";
+    s.style.color = "red";
+  } else if(p.length < 8){
+    s.innerHTML = "Medium password";
+    s.style.color = "orange";
+  } else {
+    s.innerHTML = "Strong password";
+    s.style.color = "green";
+  }
+}
+
+function validate(){
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var pass = document.getElementById("pass").value;
+  var valid = true;
+
+  if(name == "" || name.length < 3){
+    document.getElementById("nErr").innerHTML = "Enter valid name";
+    valid = false;
+  } else {
+    document.getElementById("nErr").innerHTML = "";
+  }
+
+  if(email.includes("@") == false || email.includes(".") == false){
+    document.getElementById("eErr").innerHTML = "Enter valid email";
+    valid = false;
+  } else {
+    document.getElementById("eErr").innerHTML = "";
+  }
+
+  if(pass.length < 6){
+    document.getElementById("pErr").innerHTML = "Password must be 6+ chars";
+    valid = false;
+  } else {
+    document.getElementById("pErr").innerHTML = "";
+  }
+
+  if(valid == true){
+    document.getElementById("ok").innerHTML = "Signup Success!";
+    return false; // to prevent page reload
+  }
+  return false;
+}
+</script>
+
+<br><br>
+<p></p>
+
+</body>
+</html>
